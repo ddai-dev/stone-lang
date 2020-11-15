@@ -1,7 +1,6 @@
 package chap3;
 
-import java.io.Reader;
-import java.io.StringReader;
+import java.io.*;
 
 /**
  * @author ddai
@@ -9,6 +8,23 @@ import java.io.StringReader;
  */
 public class Util {
     public static Reader getReader() {
-        return new StringReader("/Users/daniel/github/stone-lang/src/test.txt");
+        return new StringReader(getContent("/Users/daniel/github/stone-lang/src/test.txt"));
+    }
+
+    public static String getContent(String path) {
+        String res = "";
+        try {
+            final BufferedReader bufferedReader = new BufferedReader(new FileReader("/Users/daniel/github/stone-lang/src/test.txt"));
+            String line = null;
+            while ((line = bufferedReader.readLine()) != null) {
+                res += line;
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return res;
     }
 }
